@@ -8,6 +8,10 @@ import AnimeItem from "./AnimeItem";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 110rem;
+  margin: 0 auto;
+  padding: 0 5rem;
 `;
 
 const page = getRandomInt(1000);

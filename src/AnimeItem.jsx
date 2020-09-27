@@ -1,41 +1,46 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import { truncateStr } from "./helpers";
+import styled from "styled-components";
 
 const StyledContainer = styled.div`
   display: flex;
-`;
+  width: 32rem;
+  margin-bottom: 5rem;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.backgroundBright};
 
-const StyledImage = styled.img`
-  ${({ isAdult }) =>
-    isAdult &&
-    css`
-      filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &::after {
-        content: "adult content";
-        padding: 0.5rem;
-        text-transform: uppercase;
-        color: #fff;
-        background-color: rgba(125, 125, 125, 0.7);
-      }
-    `}
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    width: 100%;
+    flex-direction: row;
+  }
+`;
+const StyledImage = styled.div`
+  min-height: 32rem;
+  min-width: 32rem;
+  background-image: url(${({ src }) => src});
+  background-size: cover;
+`;
+const StyledInnerContainer = styled.div`
+  padding: 2rem;
+`;
+const StyledTitle = styled.h2`
+  margin-bottom: 2rem;
 `;
 
 export default function AnimeItem({
-  anime: { title, coverImage, isAdult, ...anime },
+  anime: { title, coverImage, description },
 }) {
-  console.log(anime);
+  function createDescriptionHtml() {
+    return { __html: description && truncateStr(description, 500) };
+  }
+
   return (
     <StyledContainer>
-      <h1>{title.romaji}</h1>
-      {isAdult && <h3>Adult</h3>}
-      <StyledImage
-        src={coverImage.extraLarge}
-        alt={title.romaji}
-        isAdult={isAdult}
-      />
+      <StyledImage src={coverImage.extraLarge} alt={title.romaji} />
+      <StyledInnerContainer>
+        <StyledTitle>{title.romaji}</StyledTitle>
+        <p dangerouslySetInnerHTML={createDescriptionHtml()}></p>
+      </StyledInnerContainer>
     </StyledContainer>
   );
 }
