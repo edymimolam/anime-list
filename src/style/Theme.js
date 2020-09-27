@@ -3,9 +3,9 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
-    backgroundMain: "#13181c",
-    backgroundBright: "#fff",
-    primary: "#D91667",
+    dark: "#13181c",
+    bright: "#fff",
+    accent: "#D91667",
   },
   mediaQueries: {
     tablet: "only screen and (min-width: 768px)",

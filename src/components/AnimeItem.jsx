@@ -1,5 +1,5 @@
 import React from "react";
-import { truncateStr } from "./helpers";
+import { truncateStr } from "../helpers";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -7,7 +7,7 @@ const StyledContainer = styled.div`
   width: 32rem;
   margin-bottom: 5rem;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.backgroundBright};
+  background-color: ${({ theme }) => theme.colors.bright};
 
   @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 100%;

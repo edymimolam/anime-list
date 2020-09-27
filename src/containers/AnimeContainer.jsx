@@ -1,9 +1,9 @@
 import React from "react";
-import { getRandomInt } from "./helpers";
+import { getRandomInt } from "../helpers";
 import { useQuery } from "@apollo/client";
-import { GET_ANIMES } from "./graphql/get-anime";
+import { GET_ANIMES } from "../graphql/get-anime";
 import styled from "styled-components";
-import AnimeItem from "./AnimeItem";
+import AnimeItem from "../components/AnimeItem";
 
 const StyledContainer = styled.div`
   display: flex;

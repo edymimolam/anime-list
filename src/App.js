@@ -1,33 +1,27 @@
 import React from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Style from "./style";
-import ItemContainer from "./AnimeContainer";
-import styled from "styled-components";
-
-const StyledHeader = styled.header`
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0;
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: 5rem;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.backgroundBright};
-`;
+import Main from "./pages/Main";
+import Login from "./pages/Login";
 
 const client = new ApolloClient({
   uri: "https://graphql.anilist.co",
   cache: new InMemoryCache(),
 });
 
+const STORAGE_KEY = "edymimolam-anime-list-isAuth";
+
 function App() {
+  const [isAuth, setIsAuth] = useLocalStorage(STORAGE_KEY, false);
+
+  const login = () => setIsAuth(true);
+  const logout = () => setIsAuth(false);
+
   return (
     <ApolloProvider client={client}>
       <Style>
-        <div className="App">
-          <StyledHeader>
-            <h1>Oh hi Mark</h1>
-          </StyledHeader>
-          <ItemContainer />
-        </div>
+        {!isAuth ? <Login login={login} /> : <Main logout={logout} />}
       </Style>
     </ApolloProvider>
   );
