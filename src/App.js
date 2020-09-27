@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import ItemContainer from "./AnimeContainer";
+import styled from "styled-components";
+
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: center;
+`;
+
+const client = new ApolloClient({
+  uri: "https://graphql.anilist.co",
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <StyledHeader>
+          <h1>Oh hi Mark</h1>
+        </StyledHeader>
+        <ItemContainer />
+      </div>
+    </ApolloProvider>
   );
 }
 
