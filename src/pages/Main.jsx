@@ -1,5 +1,7 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import AnimeContainer from "../containers/AnimeContainer";
+import SingleAnime from "./SingleAnime";
 import Button from "../components/Button";
 import styled from "styled-components";
 
@@ -18,7 +20,14 @@ export default function Main({ logout }) {
       <StyledHeader>
         <Button callback={logout}>logout</Button>
       </StyledHeader>
-      <AnimeContainer />
+      <Switch>
+        <Route path="/single">
+          <SingleAnime />
+        </Route>
+        <Route path="/">
+          <AnimeContainer />
+        </Route>
+      </Switch>
     </>
   );
 }

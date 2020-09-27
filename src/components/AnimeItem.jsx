@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { truncateStr } from "../helpers";
 import styled from "styled-components";
 
@@ -8,6 +9,7 @@ const StyledContainer = styled.div`
   margin-bottom: 5rem;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.bright};
+  cursor: pointer;
 
   @media ${({ theme }) => theme.mediaQueries.tablet} {
     width: 100%;
@@ -30,12 +32,17 @@ const StyledTitle = styled.h2`
 export default function AnimeItem({
   anime: { title, coverImage, description },
 }) {
+  let history = useHistory();
+  function goToSinglePage() {
+    history.push("/single");
+  }
+
   function createDescriptionHtml() {
     return { __html: description && truncateStr(description, 500) };
   }
 
   return (
-    <StyledContainer>
+    <StyledContainer onClick={goToSinglePage}>
       <StyledImage src={coverImage.extraLarge} alt={title.romaji} />
       <StyledInnerContainer>
         <StyledTitle>{title.romaji}</StyledTitle>

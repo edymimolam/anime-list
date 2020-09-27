@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Style from "./style";
@@ -20,9 +21,11 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Style>
-        {!isAuth ? <Login login={login} /> : <Main logout={logout} />}
-      </Style>
+      <Router>
+        <Style>
+          {!isAuth ? <Login login={login} /> : <Main logout={logout} />}
+        </Style>
+      </Router>
     </ApolloProvider>
   );
 }
